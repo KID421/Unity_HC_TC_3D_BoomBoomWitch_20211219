@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour
             Quaternion.identity);                                                           // 生成彈珠在棋盤上
     }
 
+    private bool canSpawn = true;
+
     /// <summary>
     /// 切換回合
     /// </summary>
@@ -94,9 +96,16 @@ public class GameManager : MonoBehaviour
         {
             turn = Turn.My;
             controlSystem.canShoot = true;
+            RecycleMarble.recycleMarbles = 0;           // 回收的數量歸零
+            if (canSpawn)                               // 如果 可以生成
+            {
+                canSpawn = false;                       // 不能生成
+                Invoke("SpawnEnemy", 0.8f);             // 呼叫生成敵人
+            }
         }
         else
         {
+            canSpawn = true;
             turn = Turn.Enemy;
             onEnemyTurn.Invoke();
         }
