@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class EnemyPropControl : MonoBehaviour
 {
-    public GameManager gm;
+    private GameManager gm;
 
     [Header("每次移動的距離")]
     public float moveDistance = 2;
@@ -16,6 +16,8 @@ public class EnemyPropControl : MonoBehaviour
     public string nameMarble;
     [Header("血量")]
     public float hp = 100;
+    [Header("是否有介面")]
+    public bool hasUI;
 
     private float hpMax;
     private Image imgHp;
@@ -25,9 +27,15 @@ public class EnemyPropControl : MonoBehaviour
     {
         hpMax = hp;
 
-        imgHp = transform.Find("畫布血條").Find("血條").GetComponent<Image>();
-        textHp = transform.Find("畫布血條").Find("血量").GetComponent<Text>();
-        textHp.text = hp.ToString();
+        if (hasUI)
+        {
+            imgHp = transform.Find("畫布血條").Find("血條").GetComponent<Image>();
+            textHp = transform.Find("畫布血條").Find("血量").GetComponent<Text>();
+            textHp.text = hp.ToString();
+        }
+
+        gm = FindObjectOfType<GameManager>();
+        gm.onEnemyTurn.AddListener(Move);
     }
 
     /// <summary>
@@ -37,7 +45,9 @@ public class EnemyPropControl : MonoBehaviour
     {
         transform.position += Vector3.forward * moveDistance;
 
-        if (transform.position.z <= moveUnderLine) DestroyObject();
+        gm.SwitchTurn(true);                                        // 移動後恢復我方回合
+
+        if (transform.position.z >= moveUnderLine) DestroyObject();
     }
 
     /// <summary>
@@ -51,14 +61,22 @@ public class EnemyPropControl : MonoBehaviour
     private void Hurt(float damage)
     {
         hp -= damage;
-        imgHp.fillAmount = hp / hpMax;
-        textHp.text = hp.ToString();
+        if (hasUI)
+        {
+            imgHp.fillAmount = hp / hpMax;
+            textHp.text = hp.ToString();
+        }
         if (hp <= 0) Dead();
     }
 
     private void Dead()
     {
         Destroy(gameObject);
+
+        if (gameObject.name.Contains("彈珠"))
+        {
+            ControlSystem.maxMarbles++;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

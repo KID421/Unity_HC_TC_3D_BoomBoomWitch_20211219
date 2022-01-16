@@ -112,4 +112,5 @@ MonoBehaviour:
   moveDistance: 2
   moveUnderLine: -2
   nameMarble: "\u5F48\u73E0"
-  hp: 100
+  hp: 1
+  hasUI: 0

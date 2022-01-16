@@ -10665,6 +10665,7 @@ MonoBehaviour:
   traTestMousePosition: {fileID: 29512126}
   listMarbles: []
   fireInterval: 0.1
+  canShoot: 1
 --- !u!4 &700908030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0dcd176104090e247a1e10d36d3f9fbb, type: 3}
