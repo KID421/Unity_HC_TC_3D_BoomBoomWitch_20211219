@@ -111,3 +111,5 @@ MonoBehaviour:
   gm: {fileID: 0}
   moveDistance: 2
   moveUnderLine: -2
+  nameMarble: "\u5F48\u73E0"
+  hp: 100

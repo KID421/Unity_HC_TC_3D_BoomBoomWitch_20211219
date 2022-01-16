@@ -5,6 +5,11 @@ using UnityEngine;
 /// </summary>
 public class Marble : MonoBehaviour
 {
+    /// <summary>
+    /// §ðÀ»¤O
+    /// </summary>
+    public float attack;
+
     private void Awake()
     {
         // ª«²z.©¿²¤¹Ï¼h¸I¼²(A ¹Ï¼h¡AB¹Ï¼h) ©¿²¤ A B ¹Ï¼h¸I¼²
