@@ -1,3 +1,4 @@
+using KID;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,6 @@ using UnityEngine.UI;
 /// </summary>
 public class EnemyPropControl : MonoBehaviour
 {
-    private GameManager gm;
-
     [Header("每次移動的距離")]
     public float moveDistance = 2;
     [Header("移動的座標底線")]
@@ -16,18 +15,34 @@ public class EnemyPropControl : MonoBehaviour
     public string nameMarble;
     [Header("血量")]
     public float hp = 100;
+    [Header("傷害")]
+    public float damage = 100;
     [Header("是否有介面")]
     public bool hasUI;
+    [Header("是否為可以吃的彈珠")]
+    public bool isMarble;
     [Header("死亡音效")]
     public AudioClip soundDead;
+    [Header("金幣")]
+    public GameObject goCoin;
+    [Header("金幣掉落範圍")]
+    public Vector2Int v2CoinRange;
+
+    [SerializeField, Header("動畫控制器")]
+    private Animator ani;
 
     private float hpMax;
     private Image imgHp;
     private Text textHp;
+    private GameManager gm;
 
     private void Awake()
     {
-        hpMax = hp;
+        if (!isMarble)
+        {
+            hpMax += GameManager.instance.floorCount * 100;
+            hp = hpMax;
+        }
 
         if (hasUI)
         {
@@ -57,20 +72,33 @@ public class EnemyPropControl : MonoBehaviour
     /// </summary>
     private void DestroyObject()
     {
+        if (!isMarble) HealthManager.instance.Hurt(damage);
+
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    /// <param name="damage">傷害</param>
     private void Hurt(float damage)
     {
+        if (!isMarble) ani.SetTrigger("觸發受傷");
+
         hp -= damage;
+
         if (hasUI)
         {
             imgHp.fillAmount = hp / hpMax;
             textHp.text = hp.ToString();
         }
+
         if (hp <= 0) Dead();
     }
 
+    /// <summary>
+    /// 死亡
+    /// </summary>
     private void Dead()
     {
         Destroy(gameObject);
@@ -80,6 +108,29 @@ public class EnemyPropControl : MonoBehaviour
         if (gameObject.name.Contains("彈珠"))
         {
             ControlSystem.maxMarbles++;
+        }
+        else
+        {
+            DropCoin();
+        }
+    }
+
+    /// <summary>
+    /// 掉落金幣
+    /// </summary>
+    private void DropCoin()
+    {
+        int randomCoin = Random.Range(v2CoinRange.x, v2CoinRange.y);
+
+        for (int i = 0; i < randomCoin; i++)
+        {
+            GameObject tempCoin = Instantiate(goCoin, transform.position + Vector3.up, Quaternion.Euler(0, Random.Range(0, 360), 0));
+
+            float randomX = Random.Range(100, 300);
+            float randomY = Random.Range(500, 800);
+            float randomZ = Random.Range(100, 300);
+
+            tempCoin.GetComponent<Rigidbody>().AddForce(randomX, randomY, randomZ);
         }
     }
 

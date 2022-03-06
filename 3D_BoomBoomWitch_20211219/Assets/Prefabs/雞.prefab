@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3596344922648367946}
   - component: {fileID: 1547623785456086304}
   - component: {fileID: 1787649495431779150}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u96DE"
   m_TagString: "\u68CB\u76E4\u4E0A\u7684\u7269\u4EF6"
   m_Icon: {fileID: 0}
@@ -64,7 +64,11 @@ MonoBehaviour:
   nameMarble: "\u5F48\u73E0"
   hp: 100
   hasUI: 1
+  isMarble: 0
   soundDead: {fileID: 8300000, guid: ba20d8745167d8c4485489c2dd81a6de, type: 3}
+  goCoin: {fileID: 3281366088175895240, guid: 3f72f33bf4fed624c94454682169b631, type: 3}
+  v2CoinRange: {x: 1, y: 10}
+  ani: {fileID: 5726330535022415718}
 --- !u!1001 &2166960267147834103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,6 +143,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9dcd1e008f1b2774e92ae3dbe492539b, type: 3}
   m_PrefabInstance: {fileID: 2166960267147834103}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &5726330535022415718 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 9dcd1e008f1b2774e92ae3dbe492539b, type: 3}
+  m_PrefabInstance: {fileID: 2166960267147834103}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3977565871139151440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalRotation.w
@@ -208,11 +217,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.92387956
+      value: 0.8433915
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.38268343
+      value: -0.53729963
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -220,11 +229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

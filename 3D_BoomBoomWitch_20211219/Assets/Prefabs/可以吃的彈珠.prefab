@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5155489852463549691}
   - component: {fileID: 5739612081748653980}
   - component: {fileID: -6879645860760997091}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u53EF\u4EE5\u5403\u7684\u5F48\u73E0"
   m_TagString: "\u68CB\u76E4\u4E0A\u7684\u7269\u4EF6"
   m_Icon: {fileID: 0}
@@ -113,4 +113,7 @@ MonoBehaviour:
   nameMarble: "\u5F48\u73E0"
   hp: 1
   hasUI: 0
+  isMarble: 1
   soundDead: {fileID: 8300000, guid: 7024a431ced2ef94e9507b1304d93952, type: 3}
+  goCoin: {fileID: 3281366088175895240, guid: 3f72f33bf4fed624c94454682169b631, type: 3}
+  v2CoinRange: {x: 1, y: 10}

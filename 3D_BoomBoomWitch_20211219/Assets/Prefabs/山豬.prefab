@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3752860114323169897}
   - component: {fileID: 1525285598168284710}
   - component: {fileID: 1629287410504332746}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u5C71\u8C6C"
   m_TagString: "\u68CB\u76E4\u4E0A\u7684\u7269\u4EF6"
   m_Icon: {fileID: 0}
@@ -65,7 +65,11 @@ MonoBehaviour:
   nameMarble: "\u5F48\u73E0"
   hp: 100
   hasUI: 1
+  isMarble: 0
   soundDead: {fileID: 8300000, guid: ba20d8745167d8c4485489c2dd81a6de, type: 3}
+  goCoin: {fileID: 3281366088175895240, guid: 3f72f33bf4fed624c94454682169b631, type: 3}
+  v2CoinRange: {x: 1, y: 10}
+  ani: {fileID: 3296926164853061804}
 --- !u!1 &4692341171377724750
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalRotation.w
@@ -216,11 +220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.92387956
+      value: 0.8433915
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.38268343
+      value: -0.53729963
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -228,11 +232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 3585719761924590487, guid: cf675584e1d83594e9dbdf3fa6f1b479, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -321,5 +325,10 @@ PrefabInstance:
 --- !u!4 &8872412553359925974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 167d7b30995fefa41bb7e1fd42a76d55, type: 3}
+  m_PrefabInstance: {fileID: 8983446818327184701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3296926164853061804 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 167d7b30995fefa41bb7e1fd42a76d55, type: 3}
   m_PrefabInstance: {fileID: 8983446818327184701}
   m_PrefabAsset: {fileID: 0}

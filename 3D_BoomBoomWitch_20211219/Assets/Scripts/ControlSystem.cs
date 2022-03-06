@@ -47,9 +47,13 @@ public class ControlSystem : MonoBehaviour
     /// 是否能發射
     /// </summary>
     public bool canShoot = true;
+
+    [SerializeField, Header("動畫控制器")]
+    private Animator ani;
     #endregion
 
     #region 事件
+
     private void Start()
     {
         for (int i = 0; i < 50; i++) SpawnMarble();
@@ -129,6 +133,7 @@ public class ControlSystem : MonoBehaviour
 
         for (int i = 0; i < maxMarbles; i++)
         {
+            ani.SetTrigger("觸發攻擊");
             shootMarbles++;
             GameObject temp = listMarbles[i];
             temp.transform.position = traSpawnPoint.position;
@@ -136,6 +141,8 @@ public class ControlSystem : MonoBehaviour
             temp.GetComponent<Rigidbody>().velocity = Vector3.zero;
             temp.GetComponent<Rigidbody>().AddForce(traSpawnPoint.forward * speedShoot);    // 發射 彈珠
             SoundManager.instance.PlaySoundRandomVolue(soundShoot, 0.8f, 1.2f);
+            temp.GetComponent<Marble>().FlyToBottomCountDown();                             // 避免停留太久進入倒數飛回底部回收區
+
             yield return new WaitForSeconds(fireInterval);                                  //間隔
         }
         goArrow.SetActive(false);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;                       // 事件
 using System.Collections.Generic;
 
@@ -19,6 +20,14 @@ public class GameManager : MonoBehaviour
     public Transform traCheckboard;
     [Header("生成數量最小最大值")]
     public Vector2Int v2RandomEnemyCount = new Vector2Int(1, 7);
+    [HideInInspector]
+    public bool allObjectDead;
+    [HideInInspector]
+    /// <summary>
+    /// 層數
+    /// </summary>
+    public int floorCount;
+
     [SerializeField]
     private Transform[] traCheckboards;
     [SerializeField]
@@ -36,9 +45,34 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<int> indexColumnSecond = new List<int>();
     private ControlSystem controlSystem;
+    private bool canSpawn = true;
+    /// <summary>
+    /// 金幣數量
+    /// </summary>
+    private Text textCoin;
+    /// <summary>
+    /// 取得的金幣數量
+    /// </summary>
+    private int coin;
+    /// <summary>
+    /// 層數數字
+    /// </summary>
+    private Text textFloorCount;
+
+    public static GameManager instance;
 
     private void Awake()
     {
+        instance = this;
+
+        // 物理.忽略圖層碰撞(A 圖層，B圖層) 忽略 A B 圖層碰撞
+        Physics.IgnoreLayerCollision(6, 6);
+        Physics.IgnoreLayerCollision(6, 8);
+        Physics.IgnoreLayerCollision(7, 8);
+
+        textCoin = GameObject.Find("金幣數量").GetComponent<Text>();
+        textFloorCount = GameObject.Find("層數數字").GetComponent<Text>();
+
         // 棋盤陣列 = 棋盤群組.取得子物件的元件<變形元件>()
         traCheckboards = traCheckboard.GetComponentsInChildren<Transform>();
 
@@ -60,6 +94,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void SpawnEnemy()
     {
+        floorCount++;
+        textFloorCount.text = floorCount.ToString();
+
         int countEnemy = Random.Range(v2RandomEnemyCount.x, v2RandomEnemyCount.y);
 
         indexColumnSecond.Clear();                                                          // 清除上次剩餘的資料
@@ -86,9 +123,6 @@ public class GameManager : MonoBehaviour
         if (allObjectDead) allObjectDead = false;
     }
 
-    public bool canSpawn = true;
-    public bool allObjectDead;
-
     /// <summary>
     /// 切換回合
     /// </summary>
@@ -114,6 +148,15 @@ public class GameManager : MonoBehaviour
             if (!allObjectDead) onEnemyTurn.Invoke();
             else if (allObjectDead) SwitchTurn(true);
         }
+    }
+
+    /// <summary>
+    /// 添加金幣並更新介面
+    /// </summary>
+    public void AddCoinAndUpdateUI()
+    {
+        coin++;
+        textCoin.text = coin.ToString();
     }
 }
 
