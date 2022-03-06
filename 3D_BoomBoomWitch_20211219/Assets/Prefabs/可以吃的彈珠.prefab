@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6879645860760997091}
   m_Layer: 0
   m_Name: "\u53EF\u4EE5\u5403\u7684\u5F48\u73E0"
-  m_TagString: Untagged
+  m_TagString: "\u68CB\u76E4\u4E0A\u7684\u7269\u4EF6"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ff69f109fc083f74e8f8309d5602f3ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,7 +90,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5155489852463549689}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4fd1b7d5239c9624695cc90b00be2c23, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -108,9 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45cebda69645d6448556361252e697e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
   moveDistance: 2
   moveUnderLine: -2
   nameMarble: "\u5F48\u73E0"
   hp: 1
   hasUI: 0
+  soundDead: {fileID: 8300000, guid: 7024a431ced2ef94e9507b1304d93952, type: 3}

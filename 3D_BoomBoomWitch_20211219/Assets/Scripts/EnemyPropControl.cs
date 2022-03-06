@@ -18,6 +18,8 @@ public class EnemyPropControl : MonoBehaviour
     public float hp = 100;
     [Header("是否有介面")]
     public bool hasUI;
+    [Header("死亡音效")]
+    public AudioClip soundDead;
 
     private float hpMax;
     private Image imgHp;
@@ -72,6 +74,8 @@ public class EnemyPropControl : MonoBehaviour
     private void Dead()
     {
         Destroy(gameObject);
+        RecycleMarble.instance.CheckIsRecycleAllMarbles();
+        SoundManager.instance.PlaySoundRandomVolue(soundDead, 0.8f, 1.2f);
 
         if (gameObject.name.Contains("彈珠"))
         {

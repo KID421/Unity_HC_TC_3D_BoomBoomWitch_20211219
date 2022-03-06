@@ -684,7 +684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45cebda69645d6448556361252e697e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
   moveDistance: 2
   moveUnderLine: -2
   nameMarble: "\u5F48\u73E0"

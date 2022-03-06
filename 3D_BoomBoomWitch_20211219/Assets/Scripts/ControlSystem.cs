@@ -27,6 +27,8 @@ public class ControlSystem : MonoBehaviour
     public List<GameObject> listMarbles = new List<GameObject>();
     [Header("發射間隔"), Range(0, 5)]
     public float fireInterval = 0.5f;
+    [Header("發射音效")]
+    public AudioClip soundShoot;
 
     /// <summary>
     /// 所有彈珠數量
@@ -35,7 +37,7 @@ public class ControlSystem : MonoBehaviour
     /// <summary>
     /// 可以發射的最大彈珠數量
     /// </summary>
-    public static int maxMarbles = 2;
+    public static int maxMarbles = 10;
     /// <summary>
     /// 每次發射出去的彈珠數量
     /// </summary>
@@ -97,7 +99,7 @@ public class ControlSystem : MonoBehaviour
             // 物理 射線碰撞(射線，射線碰撞資訊，距離，圖層)
             if (Physics.Raycast(rayMouse, out hit, 100, layerToHit))
             {
-                print("滑鼠射線打到物件：" + hit.collider.name);
+                // print("滑鼠射線打到物件：" + hit.collider.name);
                 
                 Vector3 hitPosition = hit.point;                // 取得碰撞資訊的座標
                 hitPosition.y = 0.5f;                           // 調整高度軸向
@@ -105,6 +107,10 @@ public class ControlSystem : MonoBehaviour
 
                 // 角色 的 Z 軸 = 測試物件的座標 - 角色的座標 (向量)
                 transform.forward = traTestMousePosition.position - transform.position;
+                Vector3 angle = transform.eulerAngles;
+                angle.x = 0;
+                angle.z = 0;
+                transform.eulerAngles = angle;
             }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -129,6 +135,7 @@ public class ControlSystem : MonoBehaviour
             temp.transform.rotation = traSpawnPoint.rotation;
             temp.GetComponent<Rigidbody>().velocity = Vector3.zero;
             temp.GetComponent<Rigidbody>().AddForce(traSpawnPoint.forward * speedShoot);    // 發射 彈珠
+            SoundManager.instance.PlaySoundRandomVolue(soundShoot, 0.8f, 1.2f);
             yield return new WaitForSeconds(fireInterval);                                  //間隔
         }
         goArrow.SetActive(false);

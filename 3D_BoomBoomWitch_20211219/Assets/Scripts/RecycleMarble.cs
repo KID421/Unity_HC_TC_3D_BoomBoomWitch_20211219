@@ -9,8 +9,14 @@ public class RecycleMarble : MonoBehaviour
     /// Μ紆痌计秖
     /// </summary>
     public static int recycleMarbles;
+    public static RecycleMarble instance;
 
     public GameManager gm;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,8 +27,25 @@ public class RecycleMarble : MonoBehaviour
 
             // Μ紆痌计秖 糤
             recycleMarbles++;
-            // 狦 Μ计秖 单 祇甮程紆痌计秖 ち传 寄よ
-            if (recycleMarbles == ControlSystem.shootMarbles) gm.SwitchTurn(false);
+
+            CheckIsRecycleAllMarbles();
+        }
+    }
+
+    /// <summary>
+    /// 浪琩琌Μ┮Τ紆痌
+    /// </summary>
+    public void CheckIsRecycleAllMarbles()
+    {
+        // 狦 Μ计秖 单 祇甮程紆痌计秖 ち传 寄よ
+        if (recycleMarbles == ControlSystem.shootMarbles)
+        {
+            if (GameObject.FindGameObjectsWithTag("囱絃ン").Length == 0)
+            {
+                gm.allObjectDead = true;
+            }
+
+            gm.SwitchTurn(false);
         }
     }
 }
