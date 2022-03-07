@@ -63,12 +63,15 @@ MonoBehaviour:
   moveDistance: 2
   moveUnderLine: -2
   nameMarble: "\u5F48\u73E0"
-  hp: 100
+  hpBase: 150
+  hpIncrease: 150
+  damage: 150
   hasUI: 1
   isMarble: 0
   soundDead: {fileID: 8300000, guid: ba20d8745167d8c4485489c2dd81a6de, type: 3}
   goCoin: {fileID: 3281366088175895240, guid: 3f72f33bf4fed624c94454682169b631, type: 3}
-  v2CoinRange: {x: 1, y: 10}
+  v2CoinRange: {x: 5, y: 20}
+  hpCurrent: 100
   ani: {fileID: 3296926164853061804}
 --- !u!1 &4692341171377724750
 GameObject:

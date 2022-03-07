@@ -127,3 +127,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  flyAfterSpawn: 2
+  soundCoin: {fileID: 8300000, guid: 8086e04465b1a774e894d054886410c0, type: 3}

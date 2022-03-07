@@ -11,6 +11,8 @@ namespace KID
         private float speed = 10;
         [SerializeField, Header("金幣生成後多久飛行")]
         private float flyAfterSpawn = 2;
+        [SerializeField, Header("金幣音效")]
+        private AudioClip soundCoin;
 
         /// <summary>
         /// 回收金幣的位置
@@ -55,7 +57,7 @@ namespace KID
 
             transform.position = v3Coin;
 
-            if (Vector3.Distance(transform.position, traCoinIcon.position) < 2)
+            if (Vector3.Distance(transform.position, traCoinIcon.position) < 3)
             {
                 DestroyAndAddCoinCount();
             }
@@ -66,6 +68,7 @@ namespace KID
         /// </summary>
         private void DestroyAndAddCoinCount()
         {
+            SoundManager.instance.PlaySoundRandomVolue(soundCoin, 0.5f, 0.7f);
             GameManager.instance.AddCoinAndUpdateUI();
             Destroy(gameObject);
         }

@@ -13,8 +13,10 @@ public class EnemyPropControl : MonoBehaviour
     public float moveUnderLine = -2;
     [Header("彈珠的名稱")]
     public string nameMarble;
-    [Header("血量")]
-    public float hp = 100;
+    [Header("基本血量")]
+    public float hpBase = 100;
+    [Header("每一層提升血量")]
+    public float hpIncrease = 100;
     [Header("傷害")]
     public float damage = 100;
     [Header("是否有介面")]
@@ -28,6 +30,9 @@ public class EnemyPropControl : MonoBehaviour
     [Header("金幣掉落範圍")]
     public Vector2Int v2CoinRange;
 
+    [HideInInspector]
+    public float hpCurrent = 0;
+
     [SerializeField, Header("動畫控制器")]
     private Animator ani;
 
@@ -40,15 +45,19 @@ public class EnemyPropControl : MonoBehaviour
     {
         if (!isMarble)
         {
-            hpMax += GameManager.instance.floorCount * 100;
-            hp = hpMax;
+            hpMax += hpBase + (GameManager.instance.floorCount - 1) * hpIncrease;
+            hpCurrent = hpMax;
+        }
+        else
+        {
+            hpCurrent = hpBase;
         }
 
         if (hasUI)
         {
             imgHp = transform.Find("畫布血條").Find("血條").GetComponent<Image>();
             textHp = transform.Find("畫布血條").Find("血量").GetComponent<Text>();
-            textHp.text = hp.ToString();
+            textHp.text = hpCurrent.ToString();
         }
 
         gm = FindObjectOfType<GameManager>();
@@ -85,15 +94,15 @@ public class EnemyPropControl : MonoBehaviour
     {
         if (!isMarble) ani.SetTrigger("觸發受傷");
 
-        hp -= damage;
+        hpCurrent -= damage;
 
         if (hasUI)
         {
-            imgHp.fillAmount = hp / hpMax;
-            textHp.text = hp.ToString();
+            imgHp.fillAmount = hpCurrent / hpMax;
+            textHp.text = hpCurrent.ToString();
         }
 
-        if (hp <= 0) Dead();
+        if (hpCurrent <= 0) Dead();
     }
 
     /// <summary>
