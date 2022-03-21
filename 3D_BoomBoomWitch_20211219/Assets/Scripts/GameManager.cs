@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
             turn = Turn.My;
             controlSystem.canShoot = true;
             RecycleMarble.recycleMarbles = 0;   // 回收的數量歸零
+            ControlSystem.instance.ResetUIMarbleCountToMax();
+
             if (canSpawn)                                           // 如果 可以生成
             {
                 canSpawn = false;                                   // 不能生成

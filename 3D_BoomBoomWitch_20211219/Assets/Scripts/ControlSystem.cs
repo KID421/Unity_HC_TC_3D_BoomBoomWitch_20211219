@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;           // まノ ╰参.栋
 using System.Collections.Generic;   // まノ ╰参.栋. ( List)
+using UnityEngine.UI;
 
 /// <summary>
 /// 北╰参
@@ -43,6 +44,8 @@ public class ControlSystem : MonoBehaviour
     /// </summary>
     public static int shootMarbles;
 
+    public static ControlSystem instance;
+
     /// <summary>
     /// 琌祇甮
     /// </summary>
@@ -50,13 +53,25 @@ public class ControlSystem : MonoBehaviour
 
     [SerializeField, Header("笆礶北竟")]
     private Animator ani;
+
+    /// <summary>
+    /// 紆痌计秖
+    /// </summary>
+    private Text textMarbleCount;
     #endregion
 
     #region ㄆン
+    private void Awake()
+    {
+        instance = this;
+        textMarbleCount = GameObject.Find("紆痌计秖").GetComponent<Text>();
+    }
 
     private void Start()
     {
         for (int i = 0; i < 50; i++) SpawnMarble();
+
+        UpdateUIMarbleCount();
     }
 
     private void Update()
@@ -142,10 +157,29 @@ public class ControlSystem : MonoBehaviour
             temp.GetComponent<Rigidbody>().AddForce(traSpawnPoint.forward * speedShoot);    // 祇甮 紆痌
             SoundManager.instance.PlaySoundRandomVolue(soundShoot, 0.8f, 1.2f);
             temp.GetComponent<Marble>().FlyToBottomCountDown();                             // 磷氨痙び秈计┏场Μ跋
+            UpdateUIMarbleCount();
 
             yield return new WaitForSeconds(fireInterval);                                  //丁筳
         }
         goArrow.SetActive(false);
+    }
+
+    /// <summary>
+    /// 穝ざ紆痌计秖
+    /// </summary>
+    public void UpdateUIMarbleCount()
+    {
+        int marblesLess = maxMarbles - shootMarbles;
+        string content = marblesLess != 0 ? "x " + marblesLess : "";
+        textMarbleCount.text = content;
+    }
+
+    /// <summary>
+    /// 砞ざ紆痌计秖確程
+    /// </summary>
+    public void ResetUIMarbleCountToMax()
+    {
+        textMarbleCount.text = "x " + maxMarbles;
     }
     #endregion
 }
