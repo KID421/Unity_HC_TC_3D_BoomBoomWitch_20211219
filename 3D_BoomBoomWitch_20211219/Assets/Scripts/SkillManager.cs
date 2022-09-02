@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace KID
 {
     /// <summary>
-    /// �ޯ�޲z
+    /// 技能管理
     /// </summary>
     public class SkillManager : MonoBehaviour
     {

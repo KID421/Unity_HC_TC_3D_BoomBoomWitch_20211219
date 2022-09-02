@@ -1,57 +1,57 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// ±±¨î¨t²Î
-/// «ü¦V·Æ¹«¦ì¸m
-/// µo®g¼u¯]
-/// ¦^¦X±±¨î
+/// æ§åˆ¶ç³»çµ±
+/// æŒ‡å‘æ»‘é¼ ä½ç½®
+/// ç™¼å°„å½ˆç 
+/// å›åˆæ§åˆ¶
 /// </summary>
 public class ControlSystemTutorial : MonoBehaviour
 {
-    #region ¤w§¹¦¨°Ï
-    #region Äæ¦ì
-    [Header("®g½u­n¸I¼²ªº¹Ï¼h")]
+    #region å·²å®Œæˆå€
+    #region æ¬„ä½
+    [Header("å°„ç·šè¦ç¢°æ’çš„åœ–å±¤")]
     public LayerMask layerToHit;
-    [Header("·Æ¹«¦ì¸m")]
+    [Header("æ»‘é¼ ä½ç½®")]
     public Transform traTestMousePosition;
-    [Header("½bÀY")]
+    [Header("ç®­é ­")]
     public GameObject goArrow;
 
     /// <summary>
-    /// ©Ò¦³¼u¯]¼Æ¶q
+    /// æ‰€æœ‰å½ˆç æ•¸é‡
     /// </summary>
     public static int allMarbles;
     /// <summary>
-    /// ¥i¥Hµo®gªº³Ì¤j¼u¯]¼Æ¶q
+    /// å¯ä»¥ç™¼å°„çš„æœ€å¤§å½ˆç æ•¸é‡
     /// </summary>
     public static int maxMarbles = 2;
     /// <summary>
-    /// ¨C¦¸µo®g¥X¥hªº¼u¯]¼Æ¶q
+    /// æ¯æ¬¡ç™¼å°„å‡ºå»çš„å½ˆç æ•¸é‡
     /// </summary>
     public static int shootMarbles;
 
     /// <summary>
-    /// ¬O§_¯àµo®g
+    /// æ˜¯å¦èƒ½ç™¼å°„
     /// </summary>
     private bool canShoot = true;
     #endregion
 
-    #region ¨Æ¥ó
+    #region äº‹ä»¶
     private void Update()
     {
         MouseControl();
     }
     #endregion
 
-    #region ¤èªk
+    #region æ–¹æ³•
     /// <summary>
-    /// ·Æ¹«±±¨î
+    /// æ»‘é¼ æ§åˆ¶
     /// </summary>
     private void MouseControl()
     {
-        if (!canShoot) return;              // ¦pªG ²{¦b¬O ¼Ä¤è¦^¦X ´N¸õ¥X
+        if (!canShoot) return;              // å¦‚æœ ç¾åœ¨æ˜¯ æ•µæ–¹å›åˆ å°±è·³å‡º
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -65,9 +65,9 @@ public class ControlSystemTutorial : MonoBehaviour
 
             if (Physics.Raycast(rayMouse, out hit, 100, layerToHit))
             {
-                Vector3 hitPosition = hit.point;                // ¨ú±o¸I¼²¸ê°Tªº®y¼Ğ
-                hitPosition.y = 0.5f;                           // ½Õ¾ã°ª«×¶b¦V
-                traTestMousePosition.position = hitPosition;    // §ó·s´ú¸Õª«¥ó®y¼Ğ
+                Vector3 hitPosition = hit.point;                // å–å¾—ç¢°æ’è³‡è¨Šçš„åº§æ¨™
+                hitPosition.y = 0.5f;                           // èª¿æ•´é«˜åº¦è»¸å‘
+                traTestMousePosition.position = hitPosition;    // æ›´æ–°æ¸¬è©¦ç‰©ä»¶åº§æ¨™
                 transform.forward = traTestMousePosition.position - transform.position;
             }
         }
@@ -79,31 +79,31 @@ public class ControlSystemTutorial : MonoBehaviour
     #endregion
     #endregion
 
-    #region ±Ğ¾Ç°Ï
+    #region æ•™å­¸å€
     public Transform point;
     public int speed = 700;
     public GameObject marble;
 
-    // 1. Instantiate - ¥Í¦¨ª«¥ó
-    // Instantiate(­n¥Í¦¨ªºª«¥ó¡A¥Í¦¨ªº®y¼Ğ¡A¥Í¦¨ªº¨¤«×)
+    // 1. Instantiate - ç”Ÿæˆç‰©ä»¶
+    // Instantiate(è¦ç”Ÿæˆçš„ç‰©ä»¶ï¼Œç”Ÿæˆçš„åº§æ¨™ï¼Œç”Ÿæˆçš„è§’åº¦)
 
-    // 2. SetActive - Åã¥Ü©ÎÁôÂÃª«¥ó
-    // SetActive(¥¬ªL­È) - ¥¬ªL­È true Åã¥Ü¡Afalse ÁôÂÃ
+    // 2. SetActive - é¡¯ç¤ºæˆ–éš±è—ç‰©ä»¶
+    // SetActive(å¸ƒæ—å€¼) - å¸ƒæ—å€¼ true é¡¯ç¤ºï¼Œfalse éš±è—
 
-    // 3. GetComponent - ¨ú±o¤¸¥ó
-    // GetComponent<¤¸¥ó>()
+    // 3. GetComponent - å–å¾—å…ƒä»¶
+    // GetComponent<å…ƒä»¶>()
 
-    // 4. AddForce - ²K¥[±À¤O
-    // AddForce(±À¤O)
+    // 4. AddForce - æ·»åŠ æ¨åŠ›
+    // AddForce(æ¨åŠ›)
 
     /// <summary>
-    /// µo®g¼u¯]
+    /// ç™¼å°„å½ˆç 
     /// </summary>
     private IEnumerator FireMarble()
     {
         GameObject temp = Instantiate(marble, point.position, point.rotation);
         temp.GetComponent<Rigidbody>().AddForce(goArrow.transform.up * speed);
-        yield return new WaitForSeconds(0.5f);         // µ¥«İ¶¡¹j®É¶¡
+        yield return new WaitForSeconds(0.5f);         // ç­‰å¾…é–“éš”æ™‚é–“
         goArrow.SetActive(false);
     }
     #endregion

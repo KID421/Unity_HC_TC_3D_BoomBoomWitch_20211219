@@ -1,31 +1,31 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace KID
 {
     /// <summary>
-    /// ª÷¹ôºŞ²z
+    /// é‡‘å¹£ç®¡ç†
     /// </summary>
     public class Coin : MonoBehaviour
     {
-        [SerializeField, Header("ª÷¹ô­¸¦æ³t«×")]
+        [SerializeField, Header("é‡‘å¹£é£›è¡Œé€Ÿåº¦")]
         private float speed = 10;
-        [SerializeField, Header("ª÷¹ô¥Í¦¨«á¦h¤[­¸¦æ")]
+        [SerializeField, Header("é‡‘å¹£ç”Ÿæˆå¾Œå¤šä¹…é£›è¡Œ")]
         private float flyAfterSpawn = 2;
-        [SerializeField, Header("ª÷¹ô­µ®Ä")]
+        [SerializeField, Header("é‡‘å¹£éŸ³æ•ˆ")]
         private AudioClip soundCoin;
 
         /// <summary>
-        /// ¦^¦¬ª÷¹ôªº¦ì¸m
+        /// å›æ”¶é‡‘å¹£çš„ä½ç½®
         /// </summary>
         private Transform traCoinIcon;
         /// <summary>
-        /// ¶}©l­¸
+        /// é–‹å§‹é£›
         /// </summary>
         private bool startFly;
 
         private void Awake()
         {
-            traCoinIcon = GameObject.Find("¦^¦¬ª÷¹ôªº¦ì¸m").transform;
+            traCoinIcon = GameObject.Find("å›æ”¶é‡‘å¹£çš„ä½ç½®").transform;
 
             Invoke("StartFly", flyAfterSpawn);
         }
@@ -36,7 +36,7 @@ namespace KID
         }
 
         /// <summary>
-        /// ¶}©l­¸¦æ
+        /// é–‹å§‹é£›è¡Œ
         /// </summary>
         private void StartFly()
         {
@@ -44,7 +44,7 @@ namespace KID
         }
 
         /// <summary>
-        /// ­¸©¹ª÷¹ô¹Ï¥Ü
+        /// é£›å¾€é‡‘å¹£åœ–ç¤º
         /// </summary>
         private void FlyToCoinIcon()
         {
@@ -64,7 +64,7 @@ namespace KID
         }
 
         /// <summary>
-        /// §R°£¨Ã¥B²K¥[ª÷¹ô¼Æ¶q
+        /// åˆªé™¤ä¸¦ä¸”æ·»åŠ é‡‘å¹£æ•¸é‡
         /// </summary>
         private void DestroyAndAddCoinCount()
         {

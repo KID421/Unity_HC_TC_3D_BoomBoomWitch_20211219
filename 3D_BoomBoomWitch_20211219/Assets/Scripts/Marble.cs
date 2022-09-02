@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ¼u¯]¨t²Î
+/// å½ˆç ç³»çµ±
 /// </summary>
 public class Marble : MonoBehaviour
 {
     /// <summary>
-    /// §ğÀ»¤O
+    /// æ”»æ“ŠåŠ›
     /// </summary>
     public float attack;
 
-    [SerializeField, Header("¥Í¦¨«á¦h¤[­¸©¹©³³¡")]
+    [SerializeField, Header("ç”Ÿæˆå¾Œå¤šä¹…é£›å¾€åº•éƒ¨")]
     private float flyToBottomAfterSpawn = 7;
 
     private Rigidbody rig;
@@ -21,7 +21,7 @@ public class Marble : MonoBehaviour
     }
 
     /// <summary>
-    /// ­¸©¹©³³¡­Ë¼Æ
+    /// é£›å¾€åº•éƒ¨å€’æ•¸
     /// </summary>
     public void FlyToBottomCountDown()
     {
@@ -30,7 +30,7 @@ public class Marble : MonoBehaviour
     }
 
     /// <summary>
-    /// ¥Í¦¨«á­¸©¹©³³¡
+    /// ç”Ÿæˆå¾Œé£›å¾€åº•éƒ¨
     /// </summary>
     private void FlyToBottom()
     {

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
@@ -14,11 +14,11 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼½©ñ­µ®Ä¨Ã¥BÀH¾÷­µ¶q
+    /// æ’­æ”¾éŸ³æ•ˆä¸¦ä¸”éš¨æ©ŸéŸ³é‡
     /// </summary>
-    /// <param name="sound">­n¼½©ñªº­µ®Ä</param>
-    /// <param name="min">³Ì¤p­µ¶q</param>
-    /// <param name="max">³Ì¤j­µ¶q</param>
+    /// <param name="sound">è¦æ’­æ”¾çš„éŸ³æ•ˆ</param>
+    /// <param name="min">æœ€å°éŸ³é‡</param>
+    /// <param name="max">æœ€å¤§éŸ³é‡</param>
     public void PlaySoundRandomVolue(AudioClip sound, float min, float max)
     {
         float randomVolume = Random.Range(min, max);

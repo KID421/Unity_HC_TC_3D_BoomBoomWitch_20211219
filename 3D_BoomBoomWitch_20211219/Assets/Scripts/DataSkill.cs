@@ -1,25 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace KID
 {
     /// <summary>
-    /// §Ş¯à¸ê®Æ
+    /// æŠ€èƒ½è³‡æ–™
     /// </summary>
     [CreateAssetMenu(menuName = "KID/Data Skill")]
     public class DataSkill : ScriptableObject
     {
-        [Header("§Ş¯à¦WºÙ")]
+        [Header("æŠ€èƒ½åç¨±")]
         public string skillName;
-        [Header("§Ş¯àÃş«¬")]
+        [Header("æŠ€èƒ½é¡å‹")]
         public TypeSkill typeSkill;
-        [Header("§Ş¯à»¡©ú")]
+        [Header("æŠ€èƒ½èªªæ˜")]
         public string skillDescription;
-        [Header("§Ş¯à¹Ï¥Ü")]
+        [Header("æŠ€èƒ½åœ–ç¤º")]
         public Sprite skillSprite;
     }
 
     /// <summary>
-    /// §Ş¯àÃş«¬
+    /// æŠ€èƒ½é¡å‹
     /// </summary>
     public enum TypeSkill
     {

@@ -1,39 +1,39 @@
-using KID;
+ï»¿using KID;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ¼Ä¤H¸ò¹D¨ã±±¨î¾¹
+/// æ•µäººè·Ÿé“å…·æ§åˆ¶å™¨
 /// </summary>
 public class EnemyPropControl : MonoBehaviour
 {
-    [Header("¨C¦¸²¾°Êªº¶ZÂ÷")]
+    [Header("æ¯æ¬¡ç§»å‹•çš„è·é›¢")]
     public float moveDistance = 2;
-    [Header("²¾°Êªº®y¼Ğ©³½u")]
+    [Header("ç§»å‹•çš„åº§æ¨™åº•ç·š")]
     public float moveUnderLine = -2;
-    [Header("¼u¯]ªº¦WºÙ")]
+    [Header("å½ˆç çš„åç¨±")]
     public string nameMarble;
-    [Header("°ò¥»¦å¶q")]
+    [Header("åŸºæœ¬è¡€é‡")]
     public float hpBase = 100;
-    [Header("¨C¤@¼h´£¤É¦å¶q")]
+    [Header("æ¯ä¸€å±¤æå‡è¡€é‡")]
     public float hpIncrease = 100;
-    [Header("¶Ë®`")]
+    [Header("å‚·å®³")]
     public float damage = 100;
-    [Header("¬O§_¦³¤¶­±")]
+    [Header("æ˜¯å¦æœ‰ä»‹é¢")]
     public bool hasUI;
-    [Header("¬O§_¬°¥i¥H¦Yªº¼u¯]")]
+    [Header("æ˜¯å¦ç‚ºå¯ä»¥åƒçš„å½ˆç ")]
     public bool isMarble;
-    [Header("¦º¤`­µ®Ä")]
+    [Header("æ­»äº¡éŸ³æ•ˆ")]
     public AudioClip soundDead;
-    [Header("ª÷¹ô")]
+    [Header("é‡‘å¹£")]
     public GameObject goCoin;
-    [Header("ª÷¹ô±¼¸¨½d³ò")]
+    [Header("é‡‘å¹£æ‰è½ç¯„åœ")]
     public Vector2Int v2CoinRange;
 
     [HideInInspector]
     public float hpCurrent = 0;
 
-    [SerializeField, Header("°Êµe±±¨î¾¹")]
+    [SerializeField, Header("å‹•ç•«æ§åˆ¶å™¨")]
     private Animator ani;
 
     private float hpMax;
@@ -55,8 +55,8 @@ public class EnemyPropControl : MonoBehaviour
 
         if (hasUI)
         {
-            imgHp = transform.Find("µe¥¬¦å±ø").Find("¦å±ø").GetComponent<Image>();
-            textHp = transform.Find("µe¥¬¦å±ø").Find("¦å¶q").GetComponent<Text>();
+            imgHp = transform.Find("ç•«å¸ƒè¡€æ¢").Find("è¡€æ¢").GetComponent<Image>();
+            textHp = transform.Find("ç•«å¸ƒè¡€æ¢").Find("è¡€é‡").GetComponent<Text>();
             textHp.text = hpCurrent.ToString();
         }
 
@@ -65,19 +65,19 @@ public class EnemyPropControl : MonoBehaviour
     }
 
     /// <summary>
-    /// ²¾°Ê
+    /// ç§»å‹•
     /// </summary>
     private void Move()
     {
         transform.position += Vector3.forward * moveDistance;
 
-        gm.SwitchTurn(true);                                        // ²¾°Ê«á«ì´_§Ú¤è¦^¦X
+        gm.SwitchTurn(true);                                        // ç§»å‹•å¾Œæ¢å¾©æˆ‘æ–¹å›åˆ
 
         if (transform.position.z >= moveUnderLine) DestroyObject();
     }
 
     /// <summary>
-    /// §R°£ª«¥ó
+    /// åˆªé™¤ç‰©ä»¶
     /// </summary>
     private void DestroyObject()
     {
@@ -87,12 +87,12 @@ public class EnemyPropControl : MonoBehaviour
     }
 
     /// <summary>
-    /// ¦º¤`
+    /// æ­»äº¡
     /// </summary>
-    /// <param name="damage">¶Ë®`</param>
+    /// <param name="damage">å‚·å®³</param>
     private void Hurt(float damage)
     {
-        if (!isMarble) ani.SetTrigger("Ä²µo¨ü¶Ë");
+        if (!isMarble) ani.SetTrigger("è§¸ç™¼å—å‚·");
 
         hpCurrent -= damage;
 
@@ -106,7 +106,7 @@ public class EnemyPropControl : MonoBehaviour
     }
 
     /// <summary>
-    /// ¦º¤`
+    /// æ­»äº¡
     /// </summary>
     private void Dead()
     {
@@ -114,7 +114,7 @@ public class EnemyPropControl : MonoBehaviour
         RecycleMarble.instance.CheckIsRecycleAllMarbles();
         SoundManager.instance.PlaySoundRandomVolue(soundDead, 0.8f, 1.2f);
 
-        if (gameObject.name.Contains("¼u¯]"))
+        if (gameObject.name.Contains("å½ˆç "))
         {
             ControlSystem.maxMarbles++;
         }
@@ -125,7 +125,7 @@ public class EnemyPropControl : MonoBehaviour
     }
 
     /// <summary>
-    /// ±¼¸¨ª÷¹ô
+    /// æ‰è½é‡‘å¹£
     /// </summary>
     private void DropCoin()
     {

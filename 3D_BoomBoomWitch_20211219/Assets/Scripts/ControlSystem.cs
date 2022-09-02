@@ -1,70 +1,70 @@
-using UnityEngine;
-using System.Collections;           // ¤Ş¥Î ¨t²Î.¶°¦X
-using System.Collections.Generic;   // ¤Ş¥Î ¨t²Î.¶°¦X.¤@¯ë (¥]§t List)
+ï»¿using UnityEngine;
+using System.Collections;           // å¼•ç”¨ ç³»çµ±.é›†åˆ
+using System.Collections.Generic;   // å¼•ç”¨ ç³»çµ±.é›†åˆ.ä¸€èˆ¬ (åŒ…å« List)
 using UnityEngine.UI;
 
 /// <summary>
-/// ±±¨î¨t²Î
-/// «ü¦V·Æ¹«¦ì¸m
-/// µo®g¼u¯]
-/// ¦^¦X±±¨î
+/// æ§åˆ¶ç³»çµ±
+/// æŒ‡å‘æ»‘é¼ ä½ç½®
+/// ç™¼å°„å½ˆç 
+/// å›åˆæ§åˆ¶
 /// </summary>
 public class ControlSystem : MonoBehaviour
 {
-    #region Äæ¦ì
-    [Header("½bÀY")]
+    #region æ¬„ä½
+    [Header("ç®­é ­")]
     public GameObject goArrow;
-    [Header("¥Í¦¨¼u¯]¦ì¸m")]
+    [Header("ç”Ÿæˆå½ˆç ä½ç½®")]
     public Transform traSpawnPoint;
-    [Header("¼u¯]¹w»sª«")]
+    [Header("å½ˆç é è£½ç‰©")]
     public GameObject goMarbles;
-    [Header("µo®g³t«×"), Range(0, 5000)]
+    [Header("ç™¼å°„é€Ÿåº¦"), Range(0, 5000)]
     public float speedShoot = 750;
-    [Header("®g½u­n¸I¼²ªº¹Ï¼h")]
+    [Header("å°„ç·šè¦ç¢°æ’çš„åœ–å±¤")]
     public LayerMask layerToHit;
-    [Header("´ú¸Õ·Æ¹«¦ì¸m")]
+    [Header("æ¸¬è©¦æ»‘é¼ ä½ç½®")]
     public Transform traTestMousePosition;
-    [Header("©Ò¦³¼u¯]")]
+    [Header("æ‰€æœ‰å½ˆç ")]
     public List<GameObject> listMarbles = new List<GameObject>();
-    [Header("µo®g¶¡¹j"), Range(0, 5)]
+    [Header("ç™¼å°„é–“éš”"), Range(0, 5)]
     public float fireInterval = 0.5f;
-    [Header("µo®g­µ®Ä")]
+    [Header("ç™¼å°„éŸ³æ•ˆ")]
     public AudioClip soundShoot;
 
     /// <summary>
-    /// ©Ò¦³¼u¯]¼Æ¶q
+    /// æ‰€æœ‰å½ˆç æ•¸é‡
     /// </summary>
     public static int allMarbles;
     /// <summary>
-    /// ¥i¥Hµo®gªº³Ì¤j¼u¯]¼Æ¶q
+    /// å¯ä»¥ç™¼å°„çš„æœ€å¤§å½ˆç æ•¸é‡
     /// </summary>
     public static int maxMarbles = 10;
     /// <summary>
-    /// ¨C¦¸µo®g¥X¥hªº¼u¯]¼Æ¶q
+    /// æ¯æ¬¡ç™¼å°„å‡ºå»çš„å½ˆç æ•¸é‡
     /// </summary>
     public static int shootMarbles;
 
     public static ControlSystem instance;
 
     /// <summary>
-    /// ¬O§_¯àµo®g
+    /// æ˜¯å¦èƒ½ç™¼å°„
     /// </summary>
     public bool canShoot = true;
 
-    [SerializeField, Header("°Êµe±±¨î¾¹")]
+    [SerializeField, Header("å‹•ç•«æ§åˆ¶å™¨")]
     private Animator ani;
 
     /// <summary>
-    /// ¼u¯]¼Æ¶q
+    /// å½ˆç æ•¸é‡
     /// </summary>
     private Text textMarbleCount;
     #endregion
 
-    #region ¨Æ¥ó
+    #region äº‹ä»¶
     private void Awake()
     {
         instance = this;
-        textMarbleCount = GameObject.Find("¼u¯]¼Æ¶q").GetComponent<Text>();
+        textMarbleCount = GameObject.Find("å½ˆç æ•¸é‡").GetComponent<Text>();
     }
 
     private void Start()
@@ -80,24 +80,24 @@ public class ControlSystem : MonoBehaviour
     }
     #endregion
 
-    #region ¤èªk
+    #region æ–¹æ³•
     /// <summary>
-    /// ¥Í¦¨¼u¯]¦s©ñ¨ì²M³æ¤º
+    /// ç”Ÿæˆå½ˆç å­˜æ”¾åˆ°æ¸…å–®å…§
     /// </summary>
     private void SpawnMarble()
     {
-        // ¼u¯]Á`¼Æ¼W¥[
+        // å½ˆç ç¸½æ•¸å¢åŠ 
         allMarbles++;
-        // ©Ò¦³¼u¯]²M³æ.²K¥[(¥Í¦¨¼u¯])
+        // æ‰€æœ‰å½ˆç æ¸…å–®.æ·»åŠ (ç”Ÿæˆå½ˆç )
         listMarbles.Add(Instantiate(goMarbles, new Vector3(0, 0, 100), Quaternion.identity));
     }
 
     /// <summary>
-    /// ·Æ¹«±±¨î
+    /// æ»‘é¼ æ§åˆ¶
     /// </summary>
     private void MouseControl()
     {
-        if (!canShoot) return;              // ¦pªG ²{¦b¬O ¼Ä¤è¦^¦X ´N¸õ¥X
+        if (!canShoot) return;              // å¦‚æœ ç¾åœ¨æ˜¯ æ•µæ–¹å›åˆ å°±è·³å‡º
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -107,24 +107,24 @@ public class ControlSystem : MonoBehaviour
         {
             Vector3 v3Mouse = Input.mousePosition;
 
-            // print("·Æ¹«®y¼Ğ¡G" + v3Mouse);
+            // print("æ»‘é¼ åº§æ¨™ï¼š" + v3Mouse);
 
-            // ®g½u = ¥D­nÄá¼v¾÷.¿Ã¹õ®y¼ĞÂà®g½u(·Æ¹«®y¼Ğ)
+            // å°„ç·š = ä¸»è¦æ”å½±æ©Ÿ.è¢å¹•åº§æ¨™è½‰å°„ç·š(æ»‘é¼ åº§æ¨™)
             Ray rayMouse = Camera.main.ScreenPointToRay(v3Mouse);
-            // ®g½u¸I¼²¸ê°T
+            // å°„ç·šç¢°æ’è³‡è¨Š
             RaycastHit hit;
 
-            // ¦pªG ®g½u¥´¨ìª«¥ó´N³B²z
-            // ª«²z ®g½u¸I¼²(®g½u¡A®g½u¸I¼²¸ê°T¡A¶ZÂ÷¡A¹Ï¼h)
+            // å¦‚æœ å°„ç·šæ‰“åˆ°ç‰©ä»¶å°±è™•ç†
+            // ç‰©ç† å°„ç·šç¢°æ’(å°„ç·šï¼Œå°„ç·šç¢°æ’è³‡è¨Šï¼Œè·é›¢ï¼Œåœ–å±¤)
             if (Physics.Raycast(rayMouse, out hit, 100, layerToHit))
             {
-                // print("·Æ¹«®g½u¥´¨ìª«¥ó¡G" + hit.collider.name);
+                // print("æ»‘é¼ å°„ç·šæ‰“åˆ°ç‰©ä»¶ï¼š" + hit.collider.name);
                 
-                Vector3 hitPosition = hit.point;                // ¨ú±o¸I¼²¸ê°Tªº®y¼Ğ
-                hitPosition.y = 0.5f;                           // ½Õ¾ã°ª«×¶b¦V
-                traTestMousePosition.position = hitPosition;    // §ó·s´ú¸Õª«¥ó®y¼Ğ
+                Vector3 hitPosition = hit.point;                // å–å¾—ç¢°æ’è³‡è¨Šçš„åº§æ¨™
+                hitPosition.y = 0.5f;                           // èª¿æ•´é«˜åº¦è»¸å‘
+                traTestMousePosition.position = hitPosition;    // æ›´æ–°æ¸¬è©¦ç‰©ä»¶åº§æ¨™
 
-                // ¨¤¦â ªº Z ¶b = ´ú¸Õª«¥óªº®y¼Ğ - ¨¤¦âªº®y¼Ğ (¦V¶q)
+                // è§’è‰² çš„ Z è»¸ = æ¸¬è©¦ç‰©ä»¶çš„åº§æ¨™ - è§’è‰²çš„åº§æ¨™ (å‘é‡)
                 transform.forward = traTestMousePosition.position - transform.position;
                 Vector3 angle = transform.eulerAngles;
                 angle.x = 0;
@@ -140,7 +140,7 @@ public class ControlSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// µo®g¼u¯]
+    /// ç™¼å°„å½ˆç 
     /// </summary>
     private IEnumerator FireMarble()
     {
@@ -148,24 +148,24 @@ public class ControlSystem : MonoBehaviour
 
         for (int i = 0; i < maxMarbles; i++)
         {
-            ani.SetTrigger("Ä²µo§ğÀ»");
+            ani.SetTrigger("è§¸ç™¼æ”»æ“Š");
             shootMarbles++;
             GameObject temp = listMarbles[i];
             temp.transform.position = traSpawnPoint.position;
             temp.transform.rotation = traSpawnPoint.rotation;
             temp.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            temp.GetComponent<Rigidbody>().AddForce(traSpawnPoint.forward * speedShoot);    // µo®g ¼u¯]
+            temp.GetComponent<Rigidbody>().AddForce(traSpawnPoint.forward * speedShoot);    // ç™¼å°„ å½ˆç 
             SoundManager.instance.PlaySoundRandomVolue(soundShoot, 0.8f, 1.2f);
-            temp.GetComponent<Marble>().FlyToBottomCountDown();                             // Á×§K°±¯d¤Ó¤[¶i¤J­Ë¼Æ­¸¦^©³³¡¦^¦¬°Ï
+            temp.GetComponent<Marble>().FlyToBottomCountDown();                             // é¿å…åœç•™å¤ªä¹…é€²å…¥å€’æ•¸é£›å›åº•éƒ¨å›æ”¶å€
             UpdateUIMarbleCount();
 
-            yield return new WaitForSeconds(fireInterval);                                  //¶¡¹j
+            yield return new WaitForSeconds(fireInterval);                                  //é–“éš”
         }
         goArrow.SetActive(false);
     }
 
     /// <summary>
-    /// §ó·s¤¶­±¡G¼u¯]¼Æ¶q
+    /// æ›´æ–°ä»‹é¢ï¼šå½ˆç æ•¸é‡
     /// </summary>
     public void UpdateUIMarbleCount()
     {
@@ -175,7 +175,7 @@ public class ControlSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// ­«³]¤¶­±¡G¼u¯]¼Æ¶q«ì´_¬°³Ì¤j­È
+    /// é‡è¨­ä»‹é¢ï¼šå½ˆç æ•¸é‡æ¢å¾©ç‚ºæœ€å¤§å€¼
     /// </summary>
     public void ResetUIMarbleCountToMax()
     {

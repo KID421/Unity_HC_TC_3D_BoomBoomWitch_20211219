@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
@@ -7,27 +7,27 @@ using System.Collections.Generic;
 namespace KID
 {
     /// <summary>
-    /// ÀH¾÷§Ş¯à
+    /// éš¨æ©ŸæŠ€èƒ½
     /// </summary>
     public class RandomSkillManager : MonoBehaviour
     {
         public static RandomSkillManager instance;
 
-        [SerializeField, Header("©Ò¦³§Ş¯à")]
+        [SerializeField, Header("æ‰€æœ‰æŠ€èƒ½")]
         private List<DataSkill> dataSkills = new List<DataSkill>();
-        [SerializeField, Header("§Ş¯àª«¥ó")]
+        [SerializeField, Header("æŠ€èƒ½ç‰©ä»¶")]
         private GameObject goSkill;
-        [SerializeField, Header("ÀH¾÷§Ş¯à®æ¤l")]
+        [SerializeField, Header("éš¨æ©ŸæŠ€èƒ½æ ¼å­")]
         private Transform[] traRandomSkillBox;
-        [SerializeField, Header("§Ş¯àª«¥ó¤Ø¤o")]
+        [SerializeField, Header("æŠ€èƒ½ç‰©ä»¶å°ºå¯¸")]
         private float sizeSkillObject = 100;
-        [SerializeField, Header("§Ş¯à¨C¦¸²¾°Ê³æ¦ì")]
+        [SerializeField, Header("æŠ€èƒ½æ¯æ¬¡ç§»å‹•å–®ä½")]
         private float unitSkillMove = 20;
-        [SerializeField, Header("²¾°Ê¶¡¹j")]
+        [SerializeField, Header("ç§»å‹•é–“éš”")]
         private float intervalMove = 0.1f;
-        [SerializeField, Header("²¾°Ê¦¸¼Æ")]
+        [SerializeField, Header("ç§»å‹•æ¬¡æ•¸")]
         private float countMove = 30;
-        [Header("­µ®Ä")]
+        [Header("éŸ³æ•ˆ")]
         [SerializeField]private AudioClip soundRandom;
         [SerializeField]private AudioClip soundGetSkill;
 
@@ -35,7 +35,7 @@ namespace KID
         private List<RectTransform>[] listSkillRectInBox = { new List<RectTransform>(), new List<RectTransform>(), new List<RectTransform>() };
 
         /// <summary>
-        /// ÀH¾÷§Ş¯à
+        /// éš¨æ©ŸæŠ€èƒ½
         /// </summary>
         private CanvasGroup groupRandomSkill;
         private AudioSource aud;
@@ -45,7 +45,7 @@ namespace KID
             instance = this;
 
             aud = GetComponent<AudioSource>();
-            groupRandomSkill = GameObject.Find("ÀH¾÷§Ş¯à").GetComponent<CanvasGroup>();
+            groupRandomSkill = GameObject.Find("éš¨æ©ŸæŠ€èƒ½").GetComponent<CanvasGroup>();
 
             InitializeSkill();
             StartCoroutine(ShowRandomSkill());
@@ -71,7 +71,7 @@ namespace KID
         }
 
         /// <summary>
-        /// ªì©l¤Æ§Ş¯àª«¥ó
+        /// åˆå§‹åŒ–æŠ€èƒ½ç‰©ä»¶
         /// </summary>
         private void InitializeSkill()
         {
@@ -92,7 +92,7 @@ namespace KID
         }
 
         /// <summary>
-        /// ÀH¾÷§Ş¯à
+        /// éš¨æ©ŸæŠ€èƒ½
         /// </summary>
         private void RandomSkill()
         {
@@ -112,7 +112,7 @@ namespace KID
         }
 
         /// <summary>
-        /// ²¾°Ê§Ş¯à
+        /// ç§»å‹•æŠ€èƒ½
         /// </summary>
         private IEnumerator MoveSkill(List<RectTransform> listSkillRect)
         {
@@ -156,9 +156,9 @@ namespace KID
         }
 
         /// <summary>
-        /// ²H¤J²H¥XÀH¾÷§Ş¯à¸s²Õ
+        /// æ·¡å…¥æ·¡å‡ºéš¨æ©ŸæŠ€èƒ½ç¾¤çµ„
         /// </summary>
-        /// <param name="fadeIn">²H¤J</param>
+        /// <param name="fadeIn">æ·¡å…¥</param>
         public IEnumerator FadeRandomSkillGroup(bool fadeIn)
         {
             ControlSystem.instance.enabled = !fadeIn;

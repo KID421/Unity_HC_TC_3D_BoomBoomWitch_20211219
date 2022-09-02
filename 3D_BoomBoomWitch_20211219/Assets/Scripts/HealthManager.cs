@@ -1,23 +1,23 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 namespace KID
 {
     /// <summary>
-    /// ¦å¶qºŞ²z¾¹
+    /// è¡€é‡ç®¡ç†å™¨
     /// </summary>
     public class HealthManager : MonoBehaviour
     {
         public static HealthManager instance;
 
-        [SerializeField, Header("¦å¶q"), Range(0, 10000)]
+        [SerializeField, Header("è¡€é‡"), Range(0, 10000)]
         private float hp = 100;
         
-        [SerializeField, Header("¦å±ø")]
+        [SerializeField, Header("è¡€æ¢")]
         private Image imgHp;
-        [SerializeField, Header("¦å¶q")]
+        [SerializeField, Header("è¡€é‡")]
         private Text textHp;
-        [SerializeField, Header("°Êµe±±¨î¾¹")]
+        [SerializeField, Header("å‹•ç•«æ§åˆ¶å™¨")]
         private Animator ani;
         private float hpMax;
 
@@ -29,12 +29,12 @@ namespace KID
         }
 
         /// <summary>
-        /// ¨ü¶Ë
+        /// å—å‚·
         /// </summary>
-        /// <param name="damage">¶Ë®`</param>
+        /// <param name="damage">å‚·å®³</param>
         public void Hurt(float damage)
         {
-            ani.SetTrigger("Ä²µo¨ü¶Ë");
+            ani.SetTrigger("è§¸ç™¼å—å‚·");
             hp -= damage;
             UpdateUI();
 
@@ -42,7 +42,7 @@ namespace KID
         }
 
         /// <summary>
-        /// §ó·s¤¶­±
+        /// æ›´æ–°ä»‹é¢
         /// </summary>
         private void UpdateUI()
         {
@@ -51,11 +51,11 @@ namespace KID
         }
 
         /// <summary>
-        /// ¦º¤`
+        /// æ­»äº¡
         /// </summary>
         private void Dead()
         {
-            ani.SetBool("¶}Ãö¦º¤`", true);
+            ani.SetBool("é–‹é—œæ­»äº¡", true);
         }
     }
 }

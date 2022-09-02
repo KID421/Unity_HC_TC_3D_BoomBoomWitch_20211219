@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ¦^¦¬¼u¯]¨t²Î
+/// å›æ”¶å½ˆç ç³»çµ±
 /// </summary>
 public class RecycleMarble : MonoBehaviour
 {
     /// <summary>
-    /// ¦^¦¬ªº¼u¯]¼Æ¶q
+    /// å›æ”¶çš„å½ˆç æ•¸é‡
     /// </summary>
     public static int recycleMarbles;
     public static RecycleMarble instance;
@@ -20,12 +20,12 @@ public class RecycleMarble : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name.Contains("¼u¯]"))
+        if (other.name.Contains("å½ˆç "))
         {
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.transform.position = new Vector3(0, 0, 100);
 
-            // ¦^¦¬¼u¯]¼Æ¶q ¼W¥[
+            // å›æ”¶å½ˆç æ•¸é‡ å¢åŠ 
             recycleMarbles++;
 
             CheckIsRecycleAllMarbles();
@@ -33,14 +33,14 @@ public class RecycleMarble : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀË¬d¬O§_¦^¦¬©Ò¦³¼u¯]
+    /// æª¢æŸ¥æ˜¯å¦å›æ”¶æ‰€æœ‰å½ˆç 
     /// </summary>
     public void CheckIsRecycleAllMarbles()
     {
-        // ¦pªG ¦^¦¬¼Æ¶q µ¥©ó ¥iµo®g³Ì¤j¼u¯]¼Æ¶q ¤Á´«¬° ¼Ä¤è¦^¦X
+        // å¦‚æœ å›æ”¶æ•¸é‡ ç­‰æ–¼ å¯ç™¼å°„æœ€å¤§å½ˆç æ•¸é‡ åˆ‡æ›ç‚º æ•µæ–¹å›åˆ
         if (recycleMarbles == ControlSystem.shootMarbles)
         {
-            if (GameObject.FindGameObjectsWithTag("´Ñ½L¤Wªºª«¥ó").Length == 0)
+            if (GameObject.FindGameObjectsWithTag("æ£‹ç›¤ä¸Šçš„ç‰©ä»¶").Length == 0)
             {
                 gm.allObjectDead = true;
             }

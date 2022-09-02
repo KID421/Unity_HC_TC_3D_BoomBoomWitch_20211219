@@ -1,30 +1,30 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;                       // ¨Æ¥ó
+using UnityEngine.Events;                       // äº‹ä»¶
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     /// <summary>
-    /// ¦^¦X¸ê®Æ
+    /// å›åˆè³‡æ–™
     /// </summary>
     public Turn turn = Turn.My;
 
-    [Header("¼Ä¤è¦^¦X¨Æ¥ó")]
+    [Header("æ•µæ–¹å›åˆäº‹ä»¶")]
     public UnityEvent onEnemyTurn;
-    [Header("©Çª«°}¦C")]
+    [Header("æ€ªç‰©é™£åˆ—")]
     public GameObject[] goEnemys;
-    [Header("¼u¯]")]
+    [Header("å½ˆç ")]
     public GameObject goMarble;
-    [Header("´Ñ½L¸s²Õ")]
+    [Header("æ£‹ç›¤ç¾¤çµ„")]
     public Transform traCheckboard;
-    [Header("¥Í¦¨¼Æ¶q³Ì¤p³Ì¤j­È")]
+    [Header("ç”Ÿæˆæ•¸é‡æœ€å°æœ€å¤§å€¼")]
     public Vector2Int v2RandomEnemyCount = new Vector2Int(1, 7);
     [HideInInspector]
     public bool allObjectDead;
     [HideInInspector]
     /// <summary>
-    /// ¼h¼Æ
+    /// å±¤æ•¸
     /// </summary>
     public int floorCount;
 
@@ -32,30 +32,30 @@ public class GameManager : MonoBehaviour
     private Transform[] traCheckboards;
     [SerializeField]
     /// <summary>
-    /// ²Ä¤G¦C¡G¥Í¦¨©Çª«ªº´Ñ½L
+    /// ç¬¬äºŒåˆ—ï¼šç”Ÿæˆæ€ªç‰©çš„æ£‹ç›¤
     /// </summary>
     private Transform[] traColumnSecond;
     /// <summary>
-    /// ´Ñ½LÄæ¦ì¼Æ¶q
+    /// æ£‹ç›¤æ¬„ä½æ•¸é‡
     /// </summary>
     private int countRow = 8;
     /// <summary>
-    /// ²Ä¤G¦Cªº¯Á¤Ş­È¡G³B²z©Çª«¥Í¦¨¤£­«½Æ
+    /// ç¬¬äºŒåˆ—çš„ç´¢å¼•å€¼ï¼šè™•ç†æ€ªç‰©ç”Ÿæˆä¸é‡è¤‡
     /// </summary>
     [SerializeField]
     private List<int> indexColumnSecond = new List<int>();
     private ControlSystem controlSystem;
     private bool canSpawn = true;
     /// <summary>
-    /// ª÷¹ô¼Æ¶q
+    /// é‡‘å¹£æ•¸é‡
     /// </summary>
     private Text textCoin;
     /// <summary>
-    /// ¨ú±oªºª÷¹ô¼Æ¶q
+    /// å–å¾—çš„é‡‘å¹£æ•¸é‡
     /// </summary>
     private int coin;
     /// <summary>
-    /// ¼h¼Æ¼Æ¦r
+    /// å±¤æ•¸æ•¸å­—
     /// </summary>
     private Text textFloorCount;
 
@@ -65,20 +65,20 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
-        // ª«²z.©¿²¤¹Ï¼h¸I¼²(A ¹Ï¼h¡AB¹Ï¼h) ©¿²¤ A B ¹Ï¼h¸I¼²
+        // ç‰©ç†.å¿½ç•¥åœ–å±¤ç¢°æ’(A åœ–å±¤ï¼ŒBåœ–å±¤) å¿½ç•¥ A B åœ–å±¤ç¢°æ’
         Physics.IgnoreLayerCollision(6, 6);
         Physics.IgnoreLayerCollision(6, 8);
         Physics.IgnoreLayerCollision(7, 8);
 
-        textCoin = GameObject.Find("ª÷¹ô¼Æ¶q").GetComponent<Text>();
-        textFloorCount = GameObject.Find("¼h¼Æ¼Æ¦r").GetComponent<Text>();
+        textCoin = GameObject.Find("é‡‘å¹£æ•¸é‡").GetComponent<Text>();
+        textFloorCount = GameObject.Find("å±¤æ•¸æ•¸å­—").GetComponent<Text>();
 
-        // ´Ñ½L°}¦C = ´Ñ½L¸s²Õ.¨ú±o¤lª«¥óªº¤¸¥ó<ÅÜ§Î¤¸¥ó>()
+        // æ£‹ç›¤é™£åˆ— = æ£‹ç›¤ç¾¤çµ„.å–å¾—å­ç‰©ä»¶çš„å…ƒä»¶<è®Šå½¢å…ƒä»¶>()
         traCheckboards = traCheckboard.GetComponentsInChildren<Transform>();
 
-        // ªì©l²Ä¤G¦C¼Æ¶q
+        // åˆå§‹ç¬¬äºŒåˆ—æ•¸é‡
         traColumnSecond = new Transform[countRow];
-        // ¨ú±o²Ä¤G¦Cªº´Ñ½L
+        // å–å¾—ç¬¬äºŒåˆ—çš„æ£‹ç›¤
         for (int i = 9; i < 9 + countRow; i++)
         {
             traColumnSecond[i - countRow - 1] = traCheckboards[i];
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¥Í¦¨¼Ä¤H¡GÀH¾÷¼Æ¶q v2RandomEnemyCount
+    /// ç”Ÿæˆæ•µäººï¼šéš¨æ©Ÿæ•¸é‡ v2RandomEnemyCount
     /// </summary>
     private void SpawnEnemy()
     {
@@ -99,47 +99,47 @@ public class GameManager : MonoBehaviour
 
         int countEnemy = Random.Range(v2RandomEnemyCount.x, v2RandomEnemyCount.y);
 
-        indexColumnSecond.Clear();                                                          // ²M°£¤W¦¸³Ñ¾lªº¸ê®Æ
+        indexColumnSecond.Clear();                                                          // æ¸…é™¤ä¸Šæ¬¡å‰©é¤˜çš„è³‡æ–™
 
-        for (int i = 0; i < 8; i++) indexColumnSecond.Add(i);                               // ªì©l¼Æ¦r 0 ~ 7
+        for (int i = 0; i < 8; i++) indexColumnSecond.Add(i);                               // åˆå§‹æ•¸å­— 0 ~ 7
 
         for (int i = 0; i < countEnemy; i++)
         {
-            int randomEnemy = Random.Range(0, goEnemys.Length);                             // 0 ~ 2 - ÀH¾÷ 0 ©Î 1
+            int randomEnemy = Random.Range(0, goEnemys.Length);                             // 0 ~ 2 - éš¨æ©Ÿ 0 æˆ– 1
 
-            int randomColumnSecond = Random.Range(0, indexColumnSecond.Count);              // ÀH¾÷²Ä¤G¦Cªº¯Á¤Ş­È¡G²Ä¤@¦¸ 0 ~ 7 ¡A²Ä¤G¦¸§ì³Ñ¾lªº¼Æ¶qÀH¾÷­È
+            int randomColumnSecond = Random.Range(0, indexColumnSecond.Count);              // éš¨æ©Ÿç¬¬äºŒåˆ—çš„ç´¢å¼•å€¼ï¼šç¬¬ä¸€æ¬¡ 0 ~ 7 ï¼Œç¬¬äºŒæ¬¡æŠ“å‰©é¤˜çš„æ•¸é‡éš¨æ©Ÿå€¼
 
             Instantiate(goEnemys[randomEnemy], traColumnSecond[indexColumnSecond[randomColumnSecond]].position, Quaternion.identity);
 
-            indexColumnSecond.RemoveAt(randomColumnSecond);                                 // §R°£¤w¸g©ñ¸m©Çª«ªº²Ä¤G¦C´Ñ½L
+            indexColumnSecond.RemoveAt(randomColumnSecond);                                 // åˆªé™¤å·²ç¶“æ”¾ç½®æ€ªç‰©çš„ç¬¬äºŒåˆ—æ£‹ç›¤
         }
 
-        int randomMarble = Random.Range(0, indexColumnSecond.Count);                        // ³Ñ¾lªº´Ñ½L ¨ú±oÀH¾÷¤@®æ
+        int randomMarble = Random.Range(0, indexColumnSecond.Count);                        // å‰©é¤˜çš„æ£‹ç›¤ å–å¾—éš¨æ©Ÿä¸€æ ¼
         Instantiate(
             goMarble,
             traColumnSecond[indexColumnSecond[randomMarble]].position + Vector3.up,
-            Quaternion.identity);                                                           // ¥Í¦¨¼u¯]¦b´Ñ½L¤W
+            Quaternion.identity);                                                           // ç”Ÿæˆå½ˆç åœ¨æ£‹ç›¤ä¸Š
 
         if (allObjectDead) allObjectDead = false;
     }
 
     /// <summary>
-    /// ¤Á´«¦^¦X
+    /// åˆ‡æ›å›åˆ
     /// </summary>
-    /// <param name="isMyTurn">¬O§_ª±®a¦^¦X</param>
+    /// <param name="isMyTurn">æ˜¯å¦ç©å®¶å›åˆ</param>
     public void SwitchTurn(bool isMyTurn)
     {
         if (isMyTurn)
         {
             turn = Turn.My;
             controlSystem.canShoot = true;
-            RecycleMarble.recycleMarbles = 0;   // ¦^¦¬ªº¼Æ¶qÂk¹s
+            RecycleMarble.recycleMarbles = 0;   // å›æ”¶çš„æ•¸é‡æ­¸é›¶
             ControlSystem.instance.ResetUIMarbleCountToMax();
 
-            if (canSpawn)                                           // ¦pªG ¥i¥H¥Í¦¨
+            if (canSpawn)                                           // å¦‚æœ å¯ä»¥ç”Ÿæˆ
             {
-                canSpawn = false;                                   // ¤£¯à¥Í¦¨
-                Invoke("SpawnEnemy", 0.8f);                         // ©I¥s¥Í¦¨¼Ä¤H
+                canSpawn = false;                                   // ä¸èƒ½ç”Ÿæˆ
+                Invoke("SpawnEnemy", 0.8f);                         // å‘¼å«ç”Ÿæˆæ•µäºº
             }
         }
         else
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ²K¥[ª÷¹ô¨Ã§ó·s¤¶­±
+    /// æ·»åŠ é‡‘å¹£ä¸¦æ›´æ–°ä»‹é¢
     /// </summary>
     public void AddCoinAndUpdateUI()
     {
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 }
 
 /// <summary>
-/// ¦^¦X¡G§Ú¤è»P¼Ä¤è
+/// å›åˆï¼šæˆ‘æ–¹èˆ‡æ•µæ–¹
 /// </summary>
 public enum Turn
 {

@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 namespace KID
 {
     /// <summary>
-    /// §Ş¯à¤¶­±ª«¥ó
+    /// æŠ€èƒ½ä»‹é¢ç‰©ä»¶
     /// </summary>
     public class SkillUIObject : MonoBehaviour
     {
-        [Header("§Ş¯à¸ê®Æ")]
+        [Header("æŠ€èƒ½è³‡æ–™")]
         public DataSkill dataSkill;
 
         private Button btn;
@@ -20,7 +20,7 @@ namespace KID
         }
 
         /// <summary>
-        /// ¿ï¨ú§Ş¯à
+        /// é¸å–æŠ€èƒ½
         /// </summary>
         private void ChooseSkill()
         {
